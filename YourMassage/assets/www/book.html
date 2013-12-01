@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>Your Massage1</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link href="css/css/foundation.min.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="css/themes/base/jquery.ui.theme.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="css/themes/base/jquery.ui.datepicker.css" media="screen" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/js/vendor/custom.modernizr.js"></script>
+	<script type="text/javascript" src="js/js/foundation.min.js"></script>
+	<script>
+		$(function() {
+		    $( "#datepicker" ).datepicker({}); 
+		    
+		    $("#checkbox1").click(function () {
+		    	if($("#checkbox1").prop('checked')) {
+	    			$("#addressSet").hide();
+	    	   }
+	    	   else {
+	    		   $("#addressSet").show();
+	    	   }
+	    	});
+		  
+		    <!-- Default set for test -->
+		    $("#address1").val("947 Boylston Street");
+		    $("#address2").val("");
+		    $("#city").val("Newton Highlands");
+		    $("#zipcode").val("02461");
+		    $("#state").val("MA");
+		    
+		    
+		    $("#booking").click(function () {
+		    	sessionStorage.setItem("type", $("#type").val() );
+		    	sessionStorage.setItem("gender", $("#gender").val() );
+		    	sessionStorage.setItem("duration", $("#duration").val() );
+		    	sessionStorage.setItem("datepicker", $("#datepicker").val() );
+		    	sessionStorage.setItem("time", $("#time").val() );
+		    	sessionStorage.setItem("address1", $("#address1").val() );
+		    	sessionStorage.setItem("address2", $("#address2").val() );
+		    	sessionStorage.setItem("city", $("#city").val() );
+		    	sessionStorage.setItem("zipcode", $("#zipcode").val() );
+		    	sessionStorage.setItem("state", $("#state").val() );
+		    	
+		    	<!-- Datepicker can be null when a user leave as Placeholder  -->
+		    	if (!$("#datepicker").val()) {
+		    		sessionStorage.setItem("datepicker", $.datepicker.formatDate( "mm/dd/yy" , new Date() ) );
+		    	}
+	    	});
+		    
+		  });
+
+	</script>
+</head>
+<body>
+	<nav class="top-bar">
+	  <ul class="title-area">
+	    <li class="name"><h1>Your Massage</h1></li>
+	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	  </ul>
+	</nav>
+	
+	<section class="main">
+		<div class="row">
+			<div class="large-8 offset-2 columns">
+		 		<fieldset>
+				    <legend>Set Preference</legend>
+				
+					<div class="row">	
+						<label for="type">Type of Massage
+					      <select id="type" class="medium">
+					        <option value="Any Massage">Any</option>
+					        <option value="Relax Massage">Relax</option>
+					        <option value="Medical Massage" selected="selected">Medical</option>
+					        <option value="Sports Massage">Sports</option>
+					      </select>
+					     </label>	
+					</div>
+					<div class="row">	
+						<label for="gender">Therapist Gender
+					      <select id="gender" class="medium">
+					        <option value="Any" selected="selected">Any</option>
+					        <option value="Male">Male</option>
+					        <option value="Female" >Female</option>
+					      </select>
+					     </label>	
+					</div>
+					<div class="row">	
+						<label for="duration">Massage Duration
+					      <select id="duration" class="medium">
+					        <option value="60min">60min</option>
+					        <option value="90min" selected="selected">90min</option>
+					        <option value="120min" >120min</option>
+					      </select>
+					     </label>	
+					</div>
+				    
+				    <hr>
+				    
+				    <div class="row"> 
+					     <label for="datepicker">Date and Time
+					      	<input type="text" id="datepicker" readonly="readonly" placeholder="Today">
+					     </label>
+				    </div>
+				    
+				    <div class="row">
+					    <label for="time">
+					      <select id="time" class="medium">Time
+					        <option id="h0" value="12AM">12AM</option>
+					        <option id="h1" value="1AM"> 1AM</option>
+					        <option id="h2" value="2AM"> 2AM</option>
+					        <option id="h3" value="3AM"> 3AM</option>
+					        <option id="h4" value="4AM"> 4AM</option>
+					        <option id="h5" value="5AM"> 5AM</option>
+					        <option id="h6" value="6AM"> 6AM</option>
+					        <option id="h7" value="7AM"> 7AM</option>
+					        <option id="h8" value="8AM"> 8AM</option>
+					        <option id="h9" value="9AM"> 9AM</option>
+					        <option id="h10" value="10AM">10AM</option>
+					        <option id="h11" value="11AM">11AM</option>
+					        <option id="h12" value="12PM">12PM</option>
+					        <option id="h13" value="1PM"> 1PM</option>
+					        <option id="h14" value="2PM"> 2PM</option>
+					        <option id="h15" value="3PM"> 3PM</option>
+					        <option id="h16" value="4PM"> 4PM</option>
+					        <option id="h17" value="5PM"> 5PM</option>
+					        <option id="h18" value="6PM"> 6PM</option>
+					        <option id="h19" value="7PM"> 7PM</option>
+					        <option id="h20" value="8PM"> 8PM</option>
+					        <option id="h21" value="9PM"> 9PM</option>
+					        <option id="h22" value="10PM">10PM</option>
+					        <option id="h23" value="11PM">11PM</option>
+					      </select>
+					     </label>
+				     </div>
+				     
+				     <hr>
+				     
+				     <div class="row">
+				     	<label for="sameAddress"><input type="checkbox" name="sameAddress" id="checkbox1" checked="checked"><span class="custom checkbox"></span> Use the registered address</label>
+				     </div>
+				     <div class="row" id="addressSet" style="display: none">
+				     	<fieldset>
+				     		<input type="text" name="set_address1" placeholder="Address" id="address1">
+				     		<input type="text" name="set_address2" placeholder="Address2, Apt #, Room #" id="address2">
+				     		<input type="text" name="set_city" placeholder="city" id="city">
+				     		<input type="text" name="set_zipcode" placeholder="zipcode" id="zipcode">
+				     		<input type="text" name="set_state" placeholder="state" id="state">
+				     	</fieldset>		     	
+				     </div>
+				     
+				     <div class="row">
+				    	<a href="file:///android_asset/www/payment.html" class="button success expand" id="booking">Book Now</a>	 
+				     </div>
+				</fieldset>
+		 	</div>
+	 	</div>
+	</section>
+</body>
+</html>

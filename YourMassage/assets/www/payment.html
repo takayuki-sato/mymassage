@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>Your Massage1</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link href="css/css/foundation.min.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="css/themes/base/jquery.ui.theme.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="css/themes/base/jquery.ui.datepicker.css" media="screen" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/js/vendor/custom.modernizr.js"></script>
+	<script type="text/javascript" src="js/js/foundation.min.js"></script>
+	<script>
+		$(function() {
+			<!-- Logic for test, therapists are available only today  -->
+			if ( sessionStorage.getItem("datepicker") != $.datepicker.formatDate( "mm/dd/yy" , new Date() ) ) {
+				$("#no_available").show();
+				$("#pricing").hide();
+			}
+			
+			$("#type").text( sessionStorage.getItem("type") );
+			$("#gender").text( sessionStorage.getItem("gender") );
+			$("#duration").text( sessionStorage.getItem("duration") );
+			$("#datepicker").text( sessionStorage.getItem("datepicker") );
+			$("#time").text( sessionStorage.getItem("time") );
+			$("#address1").text( sessionStorage.getItem("address1") );
+			$("#address2").text( sessionStorage.getItem("address2") );
+			$("#city").text( sessionStorage.getItem("city") );
+			$("#zipcode").text( sessionStorage.getItem("zipcode") );
+			$("#state").text( sessionStorage.getItem("state") );
+		});
+	</script>
+</head>
+<body>
+	<nav class="top-bar">
+	  <ul class="title-area">
+	    <li class="name"><h1>Your Massage</h1></li>
+	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	  </ul>
+	</nav>
+	
+	<br>
+	
+	<section class="main">
+		<div class="row">
+			<div class="large-8 offset-2 columns">
+
+				<!-- Alert -->			
+				<div data-alert class="alert-box alert" id="no_available" style="display: none">
+				  No therapist is available. Please change the search.
+				  <a href="file:///android_asset/www/book.html" class="close">&times;</a>
+				</div>
+				<!-- End of Alert -->
+			
+			
+				<ul class="pricing-table" id="pricing">
+				  <li class="title">Offering</li>
+				  <li class="price">$99.99</li>
+				  <li class="description" id="type"></li>
+				  <li class="bullet-item" id="gender"></li>
+				  <li class="bullet-item" id="duration"></li>
+				  <li class="bullet-item" id="datepicker"></li>
+				  <li class="bullet-item" id="time"></li>
+				  <li class="bullet-item">
+				  	<ul class="vcard">
+					  <li class="street-address" id="address1"></li>
+					  <li class="street-address" id="address2"></li>
+					  <li class="locality" id="city"></li>
+					  <li><span class="state" id="state"></span>, <span class="zip" id="zipcode"></span></li>
+					</ul>
+				  </li>
+				  <li class="cta-button">
+				  	<a href="file:///android_asset/www/thankyou.html"><img alt="Paypal" src="images/expresscheckout.png"></a>
+				  </li>
+				</ul>
+			</div>
+	 	</div>
+	</section>
+
+</body>
+</html>
