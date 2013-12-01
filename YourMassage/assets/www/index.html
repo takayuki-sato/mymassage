@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Your Massage1</title>
+	<title>My Massage</title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -13,7 +13,10 @@
 	<script type="text/javascript" src="js/cordova-1.9.0.js"></script>
 	<script type="text/javascript" src="js/cdv-plugin-fb-connect.js"></script>
 	<script type="text/javascript" src="js/facebook-js-sdk.js"></script>
+	<script type="text/javascript" src="js/parse-1.2.13.min.js"></script>
 	<script>
+		Parse.initialize("g6hoh7SmabmGts4dSs6mOn1KoLoPjUAPDgoQFgb2", "Vcx6XPUH8PamWtn6BQOCcr8xCuDBc1gRldgi1UY0");
+	
 			$(function() {
 			    $("#login").click(function () {
 			    	localStorage.setItem("email", $("#email").val() );
@@ -21,7 +24,8 @@
 		    	});
 			    $("#loginFacebook").click(function () {
 			    	try {
-	                	FB.init({ appId: "176899895840682", nativeInterface: CDV.FB, useCachedDialogs: false });
+			    		Parse.FacebookUtils.init({ appId: "176899895840682", nativeInterface: CDV.FB, useCachedDialogs: false });
+	                	// FB.init({ appId: "176899895840682", nativeInterface: CDV.FB, useCachedDialogs: false });
 	                	console.log("init");
 	                } catch (e) {
 	                	console.log(e);
@@ -30,16 +34,16 @@
 			    	login();
 		    	});
 			    
-			    FB.Event.subscribe('auth.login', function(response) {
+			    Parse.FacebookUtils.Event.subscribe('auth.login', function(response) {
 	                console.log('auth.login event');
 	            });
 	
-				FB.Event.subscribe('auth.logout', function(response) {
+			    Parse.FacebookUtils.Event.subscribe('auth.logout', function(response) {
 	                console.log('auth.logout event');
 	            });
 				
 				function getLoginStatus() {
-	                FB.getLoginStatus(function(response) {
+					Parse.FacebookUtils.getLoginStatus(function(response) {
 	                    if (response.status == 'connected') {
 	                       console.log('logged in');
 	                    } else {
@@ -48,14 +52,30 @@
 	                });
 	            };
 				function logout() {
-	                FB.logout(function(response) {
+					Parse.FacebookUtils.logout(function(response) {
 	                          console.log('logged out');
 	                          });
 	            };
 	            
 	            function login() {
 	            	console.log("login start");
-	                FB.login( function(response) {
+	            	
+	            	Parse.FacebookUtils.logIn(null, {
+	            		  success: function(user) {
+	            		    if (!user.existed()) {
+	            		      console.log("User signed up and logged in through Facebook!");
+	            		    } else {
+	            		    	console.log("User logged in through Facebook!");
+	            		    }
+	            		  },
+	            		  error: function(user, error) {
+	            			  console.log("User cancelled the Facebook login or did not fully authorize.");
+	            		  }
+	            		},
+	            		{ scope: "publish_actions, offline_access" }
+	            	);
+	            	<!-- 
+	                /* FB.login( function(response) {
 	                    if (response.authResponse) {
 	                         console.log('logged in');
 	                         window.location.href = "file:///android_asset/www/book.html"; 
@@ -64,7 +84,9 @@
 	                    }
 	                 },
 	                 { scope: "publish_actions, offline_access" }
-	            );
+	            ); */
+	            -->
+	            	
 	            };
 			});
 		</script>
@@ -73,7 +95,7 @@
 	<div data-role="page" id="index">
 	<nav class="top-bar">
 	  <ul class="title-area">
-	    <li class="name"><h1>Your Massage</h1></li>
+	    <li class="name"><span class="success label">My Massage</span></li>
 	    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 	  </ul>
 	</nav>
